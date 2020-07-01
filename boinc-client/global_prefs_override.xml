@@ -4,3 +4,7 @@
    <ram_max_used_idle_pct>95.000000</ram_max_used_idle_pct>
    <cpu_usage_limit>100.000000</cpu_usage_limit>
 </global_preferences>
+<options>
+     <alt_platform>aarch64-unknown-linux-gnu</alt_platform>
+     <alt_platform>arm-unknown-linux-gnueabihf</alt_platform>
+</options>
