@@ -2,6 +2,6 @@
     <options>
         <!-- test different platforms -->
         <!-- <alt_platform>aarch64-unknown-linux-gnu</alt_platform> -->
-        <alt_platform>arm-unknown-linux-gnueabihf[NEON]</alt_platform>
+        <alt_platform>arm-unknown-linux-gnueabihf</alt_platform>
     </options>
 </cc_config>
