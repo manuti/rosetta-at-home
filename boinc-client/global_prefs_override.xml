@@ -3,7 +3,7 @@
    <ram_max_used_busy_pct>95.000000</ram_max_used_busy_pct>
    <ram_max_used_idle_pct>95.000000</ram_max_used_idle_pct>
    <cpu_usage_limit>100.000000</cpu_usage_limit>
-</global_preferences>
-<options>
+   <options>
      <alt_platform>arm-unknown-linux-gnueabihf</alt_platform>
-</options>
+   </options>
+</global_preferences>
