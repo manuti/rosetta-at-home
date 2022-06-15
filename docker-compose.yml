@@ -1,0 +1,43 @@
+version: '2.1'
+volumes:
+  boinc:
+services:
+  boinc-client:
+    build: ./boinc-client
+    restart: always
+    # cpu share weight when cpu is busy
+    # 1024 is default for each process
+    cpu_shares: 256
+    blkio_config:
+      # weight 10-1000, default 500
+      weight: 128
+    ports:
+      - 31416:31416
+    volumes:
+      - 'boinc:/usr/app/boinc'
+    privileged: true
+  ui:
+    build: ./ui
+    restart: always
+    privileged: true
+    volumes:
+      - 'boinc:/usr/app/stats'
+    ports:
+      - 80:80
+      - 8080:8080
+    labels:
+      io.balena.features.balena-api: '1'
+      io.balena.features.supervisor-api: '1'
+    mem_reservation: 16m
+    healthcheck:
+      test: curl -sf -o /dev/null http://127.0.0.1 || exit 1
+      interval: 1m
+      timeout: 10s
+      retries: 1
+  power-management:
+    build: ./power-management
+    restart: on-failure
+    environment:
+      - 'DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket'
+    labels:
+      io.balena.features.dbus: '1'

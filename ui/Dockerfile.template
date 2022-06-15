@@ -1,0 +1,20 @@
+FROM balenalib/%%BALENA_ARCH%%-debian-node
+
+WORKDIR /usr/app
+
+RUN install_packages \
+    boinctui \
+    kbd
+RUN curl -LO https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_arm.tar.gz
+RUN tar xfzv gotty_linux_arm.tar.gz
+
+COPY dashboard ./dashboard
+WORKDIR /usr/app/dashboard
+RUN JOBS=MAX npm install --production --unsafe-perm && npm cache clean --force && rm -rf /tmp/*
+
+WORKDIR /usr/app
+COPY boinctui.cfg /root/.boinctui.cfg
+COPY start.sh ./
+RUN chmod u+x start.sh
+
+CMD ["/usr/app/start.sh"]
